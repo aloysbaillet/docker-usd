@@ -48,7 +48,7 @@ RUN cd $TMP_DIR &&\
         variant=release \
         link=shared \
         threading=multi \
-        install
+        install > /dev/null
 
 #----------------------------------------------
 # build and install TBB
@@ -56,7 +56,7 @@ RUN cd $TMP_DIR &&\
 RUN cd $TMP_DIR &&\
     tar -zxf $DOWNLOADS_DIR/tbb2017_U6.tar.gz && \
     cd $TMP_DIR/tbb-2017_U6 && \
-    make -j ${BUILD_PROCS} && \
+    make -j ${BUILD_PROCS} > /dev/null && \
     #make tbb_cpf=1 -j ${BUILD_PROCS} && \
     cp build/*_release/*.so* $BUILD_DIR/lib &&\
     cp -R include/* $BUILD_DIR/include/
@@ -68,7 +68,7 @@ RUN cd $TMP_DIR &&\
     tar -zxf $DOWNLOADS_DIR/ilmbase-2.2.0.tar.gz &&\
     cd $TMP_DIR/ilmbase-2.2.0 && \
     ./configure --prefix=$BUILD_DIR && \
-    make -j ${BUILD_PROCS} && \
+    make -j ${BUILD_PROCS} > /dev/null && \
     make install
 
 #----------------------------------------------
@@ -78,7 +78,7 @@ RUN cd $TMP_DIR &&\
     tar -zxf $DOWNLOADS_DIR/openexr-2.2.0.tar.gz &&\
     cd $TMP_DIR/openexr-2.2.0 && \
     ./configure --prefix=$BUILD_DIR --disable-ilmbasetest && \
-    make -j ${BUILD_PROCS} && \
+    make -j ${BUILD_PROCS} > /dev/null && \
     make install
 
 #----------------------------------------------
@@ -89,7 +89,7 @@ RUN cd $TMP_DIR &&\
    cd $TMP_DIR/jemalloc-5.1.0 &&\
    ./configure \
       --prefix=$BUILD_DIR && \
-    make -j ${BUILD_PROCS} && \
+    make -j ${BUILD_PROCS} > /dev/null && \
     make install
 
 #----------------------------------------------
@@ -112,7 +112,7 @@ RUN cd $TMP_DIR &&\
       -DNO_CLEW=1 \
       -DNO_CUDA=1 \
       -DNO_TUTORIALS=1 && \
-    make -j ${BUILD_PROCS} VERBOSE=1 && \
+    make -j ${BUILD_PROCS} > /dev/null && \
     make install
 
 RUN rm -rf $TMP_DIR
